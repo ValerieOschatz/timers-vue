@@ -1,5 +1,7 @@
 # timers-vue
 
+### [Ссылка на собранный проект](https://valerieoschatz.github.io/timers-vue/)
+
 ## Project setup
 ```
 npm install
