@@ -6,31 +6,46 @@ export default {
 			sec: 0,
       min: 0,
       hour: 0,
+      savedSec: 0,
       running: false,
-      interval: null
+      interval: null,
 		}
 	},
   methods: {
     startTimer() {
       this.running = true;
 
-      this.interval = setInterval(() => {
-        this.sec += 1;
+      const date = new Date();
+      const time = date.getTime();
 
-        if (this.sec === 60) {
+      this.interval = setInterval(() => {
+        const newDate = new Date();
+        const newTime = newDate.getTime();
+
+        const t = (newTime - time)/1000 - this.sec  + this.savedSec;
+
+        if (t > 0) {
+          this.sec += 1;
+        }
+
+        if (this.sec > 59) {
           this.min += 1;
           this.sec = 0;
         }
-        if (this.min === 60) {
+
+        if (this.min > 59) {
           this.hour += 1;
           this.min = 0;
         }
       }, 1000)
+
+      this.started = true;
     },
 
     stopTimer() {
-      this.running = false;
       clearInterval(this.interval);
+      this.running = false;
+      this.savedSec = this.sec;
     },
 
     cancelTimer() {
@@ -38,6 +53,7 @@ export default {
       this.sec = 0;
       this.min = 0;
       this.hour = 0;
+      this.savedSec = 0;
     },
   },
 
