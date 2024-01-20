@@ -1,6 +1,18 @@
+<template>
+  <div class="item">
+    <span :class="`item__text ${this.running && 'item__text_running'}`">
+      {{ time }}
+    </span>
+    <div :class="`item__btn-container ${this.running && 'item__btn-container_running'}`">
+      <button v-if="running" class="item__button item__button_pause" type="button" @click="stopTimer"></button>
+      <button v-else class="item__button item__button_start" type="button" @click="startTimer"></button>
+      <button :class="`item__button ${this.running && 'item__button_running'}`" type="button" @click="cancelTimer"></button>
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
-  name: 'TimerItem',
   data() {
 		return {
 			sec: 0,
@@ -11,10 +23,18 @@ export default {
       interval: null,
 		}
 	},
+  computed: {
+    time() {
+      return `
+        ${this.hour > 0 ? this.hour + ':' : ''}
+        ${this.min > 0 ? (this.min < 10 && this.hour > 0 ? '0' + this.min : this.min) + ':' : ''}
+        ${(this.sec < 10 && this.min > 0) ? '0' + this.sec : this.sec}
+      `;
+    }
+  },
   methods: {
     startTimer() {
       this.running = true;
-
       const date = new Date();
       const time = date.getTime();
 
@@ -41,13 +61,11 @@ export default {
 
       this.started = true;
     },
-
     stopTimer() {
       clearInterval(this.interval);
       this.running = false;
       this.savedSec = this.sec;
     },
-
     cancelTimer() {
       this.stopTimer();
       this.sec = 0;
@@ -56,24 +74,8 @@ export default {
       this.savedSec = 0;
     },
   },
-
   unmounted() {
     this.stopTimer();
   },
 }
 </script>
-
-<template>
-  <div class="item">
-    <span :class="`item__text ${this.running && 'item__text_running'}`">
-      {{ 
-        `${hour > 0 ? hour + ':' : ''}${min > 0 ? (min < 10 && hour > 0 ? '0' + min : min) + ':' : ''}${(sec < 10 && min > 0) ? '0' + sec : sec}`
-      }}
-    </span>
-    <div :class="`item__btn-container ${this.running && 'item__btn-container_running'}`">
-      <button v-if="running" class="item__button item__button_pause" type="button" @click="stopTimer"></button>
-      <button v-else class="item__button item__button_start" type="button" @click="startTimer"></button>
-      <button :class="`item__button ${this.running && 'item__button_running'}`" type="button" @click="cancelTimer"></button>
-    </div>
-  </div>
-</template>

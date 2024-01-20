@@ -1,25 +1,3 @@
-<script>
-import TimerItem from './components/TimerItem.vue';
-import './index.css';
-
-export default {
-  name: 'App',
-  components: {
-    TimerItem
-  },
-  data() {
-		return {
-			timerList: []
-		}
-	},
-  methods: {
-    handleAddTimer() {
-      this.timerList = [...this.timerList, {}];
-    }
-	},
-}
-</script>
-
 <template>
   <div class="page">
     <ul class="list">
@@ -30,3 +8,24 @@ export default {
     </ul>
   </div>
 </template>
+
+<script>
+import TimerItem from './components/TimerItem.vue';
+import './index.css';
+
+export default {
+  components: {
+    TimerItem,
+  },
+  data() {
+		return {
+			timerList: [],
+		}
+	},
+  methods: {
+    handleAddTimer() {
+      this.timerList = [...this.timerList, {}];
+    }
+	},
+}
+</script>
