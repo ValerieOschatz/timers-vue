@@ -1,26 +1,14 @@
 # timers-vue
 
-### [Ссылка на собранный проект](https://valerieoschatz.github.io/timers-vue/)
+### [Ссылка на проект](https://valerieoschatz.github.io/timers-vue/)
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Список таймеров. Можно добавлять таймеры, запускать их, останавливать и обнулять.
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Технологии
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* JS
+* Vue.js
+* HTML
+* CSS
